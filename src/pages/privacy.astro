@@ -1,0 +1,58 @@
+---
+import Base from '../layouts/Base.astro';
+const updated = '12 November 2026';
+---
+<Base title="Privacy — Davesframes" description="What personal information davesframes.com collects, why, and who else handles it.">
+  <section class="section privacy">
+    <div class="container prose">
+      <div class="header" style="margin-bottom: 0">
+        <span class="badge bevel">PRIVACY</span>
+        <h1 class="heading-40">Privacy</h1>
+        <p class="body-20 muted">The short version: this site collects very little, and only what it needs to book a call with you.</p>
+      </div>
+
+      <h2 class="heading-24">Who I am</h2>
+      <p>Davesframes is run by Boswell, who designs and builds websites for SaaS companies. I'm responsible for the personal information collected on this site.</p>
+
+      <h2 class="heading-24">What I collect</h2>
+      <p>When you book a call, the booking calendar asks for your name, your email address, any notes you add and the time you pick. That's the only personal information I ask you for.</p>
+      <p>Like most websites, the services that run this site also see your IP address when your browser loads a page.</p>
+      <p>There's no analytics, no tracking or advertising code, and this site sets no cookies of its own.</p>
+
+      <h2 class="heading-24">Why I use it</h2>
+      <p>To schedule and run your intro call, follow up afterwards, and send you a quote. I don't sell your information or add you to mailing lists.</p>
+
+      <h2 class="heading-24">Who else handles it</h2>
+      <ul class="list">
+        <li><strong>Cal.com</strong> runs the booking calendar and stores your booking. The calendar may use its own cookies to work.</li>
+        <li><strong>Google Fonts</strong> serves the typefaces on this site, which means your browser sends your IP address to Google.</li>
+        <li><strong>Vercel</strong> hosts the site and keeps standard server logs, which include IP addresses.</li>
+      </ul>
+      <p>Each of these services handles data under its own privacy policy.</p>
+
+      <h2 class="heading-24">How long I keep it</h2>
+      <p>I keep booking details for up to 12 months after we last spoke, unless we start working together. Then I keep what I need for the project and for my records.</p>
+
+      <h2 class="heading-24">Your rights</h2>
+      <p>You can ask to see the information I hold about you, have it corrected, or have it deleted. Depending on where you live, privacy laws such as South Africa's POPIA or the EU and UK GDPR may give you further rights, and I'll respect them.</p>
+
+      <h2 class="heading-24">Contact</h2>
+      <!-- TODO: swap for an email address once there's one to publish -->
+      <p>For any privacy question or request, message me on X at <a href="https://x.com/D_Boswell133" target="_blank" rel="noopener">@D_Boswell133</a>.</p>
+
+      <p class="label-14 muted updated">Last updated {updated}</p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .privacy { padding-top: calc(72px + var(--section-y)); }
+  .prose { max-width: 720px; display: grid; gap: var(--space-5); }
+  .prose h2 { margin-top: var(--space-7); }
+  .prose p, .list { color: var(--fg-secondary); }
+  .prose strong { color: var(--fg-primary); font-weight: 500; }
+  .prose a { color: var(--fg-primary); text-decoration: underline; text-underline-offset: 3px; }
+  .list { display: grid; gap: var(--space-4); padding-left: 20px; list-style: disc; }
+  .updated { margin-top: var(--space-7); }
+  @media (min-width: 900px) { .privacy { padding-top: 176px; } }
+</style>

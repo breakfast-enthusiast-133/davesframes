@@ -1,0 +1,49 @@
+---
+import Logo from './Logo.astro';
+const cols = [
+  ['Site', [['Work', '/#work'], ['Process', '/#process'], ['Pricing', '/#pricing'], ['FAQ', '/#faq']]],
+  ['Contact', [['Book a call', '/contact#book']]],
+];
+---
+<footer class="band section">
+  <div class="container">
+    <div class="card bevel inner">
+      <div class="top">
+        <div class="brand stack">
+          <Logo />
+          <p class="muted">Framer sites for SaaS teams, designed in Figma first.</p>
+          <a href="https://x.com/D_Boswell133" aria-label="Davesframes on X" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M18.9 2H22l-6.8 7.8L23 22h-6.3l-4.9-6.4L6.1 22H3l7.3-8.3L1 2h6.4l4.4 5.8L18.9 2Zm-1.1 18h1.7L6.3 3.9H4.5L17.8 20Z"/></svg>
+          </a>
+        </div>
+        <nav class="cols" aria-label="Footer">
+          {cols.map(([title, links]) => (
+            <div class="col">
+              <p class="label-14">{title}</p>
+              <ul>{(links as string[][]).map(([l, h]) => <li><a class="label-14 muted" href={h}>{l}</a></li>)}</ul>
+            </div>
+          ))}
+        </nav>
+      </div>
+      <div class="legal label-14 muted">
+        <p>© 2026 Davesframes. All rights reserved.</p>
+        <a href="/privacy">Privacy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .inner { --bg: var(--bg-page); padding: var(--space-6); }
+  .top { display: grid; gap: var(--space-8); padding-bottom: var(--space-8); border-bottom: 1px solid var(--border); }
+  .brand { max-width: 296px; justify-items: start; }
+  .cols { display: flex; gap: var(--space-9); }
+  .col ul { display: grid; gap: var(--space-4); margin-top: var(--space-4); }
+  .col a:hover { color: var(--fg-primary); }
+  .legal { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-4); padding-top: var(--space-6); }
+  .legal a { text-decoration: underline; text-underline-offset: 3px; }
+  @media (min-width: 900px) {
+    .inner { padding: var(--space-8); }
+    .top { grid-template-columns: 1fr auto; }
+  }
+</style>

@@ -1,0 +1,287 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import david from '../../david-ascii-2.txt?raw';
+
+// Tracewell is held back until it's finished:
+// { name: 'Tracewell', text: 'Homepage for an AI incident-triage tool for APIs.', href: 'https://lively-leadership-890572.framer.app' },
+const projects = [
+  { name: 'Halyard', text: 'Marketing site, blog and contact page for an agent-evals platform.', href: 'https://halyard.framer.website/',
+    image: '/media/halyard-thumb.webp', alt: 'The Halyard homepage on desktop and mobile, with its product dashboard' },
+];
+const features = [
+  // media = poster still (first frame), video = the looping clip
+  { title: 'Designed in Figma', text: 'Every page is designed on a proper design system first, so you sign off before anything is built.', media: '/media/figma.webp', video: '/media/figma.mp4', alt: 'A Halyard homepage being designed in Figma with Astro Cyan components', focus: '45% center' },
+  { title: 'Built in Framer', text: 'A real Framer site your team owns and edits. No developer needed.', media: '/media/framer.webp', video: '/media/framer.mp4', alt: 'The Halyard homepage open in the Framer editor', focus: 'center' },
+  { title: 'Responsive by default', text: 'Desktop, tablet and phone layouts, each checked by hand.', media: '/media/responsive.webp', video: '/media/responsive.mp4', alt: 'Framer preview of the Halyard homepage being resized between breakpoints', focus: 'left center' },
+  { title: 'CMS and blog', text: 'Posts, changelogs and case studies you publish yourself.', media: '/media/cms.webp', video: '/media/cms.mp4', alt: 'The Posts collection in the Framer CMS with seven live articles', focus: 'left center' },
+  { title: 'Ready to launch', text: 'SEO basics, fast pages and a hand-off walkthrough before you go live.', media: '/media/launch.webp', alt: 'Lighthouse scores for the Halyard site: Performance 99, Accessibility 92, Best Practices 100, SEO 100', fit: 'contain' },
+];
+const steps = [
+  ['Intro call', 'A short call about your product, audience and goals. You get a fixed quote afterwards.'],
+  ['Design in Figma', 'Homepage first, then the rest. You review and comment right in Figma until it is right.'],
+  ['Build in Framer', 'I build the approved design in Framer: responsive, animated and connected to your CMS.'],
+  ['Launch and hand-off', 'We connect your domain, go live, and I show your team how to edit everything.'],
+];
+// Prices are a hypothesis to test on the first calls (set 2026-11-12)
+const launch = ['Homepage designed in Figma', 'Built in Framer, fully responsive', 'SEO and analytics basics', '2 rounds of revisions', 'Delivered in 2 weeks'];
+const growth = ['Everything in Launch', 'Up to 5 pages', 'CMS blog and changelog', 'Custom animations', 'Layouts tuned for every screen', '3 rounds of revisions', 'Delivered in 3 weeks', '14 days of support after launch', 'Hand-off walkthrough for your team'];
+const faqs = [
+  ['How long does a site take?', 'It depends on the package. Launch takes 2 weeks and Growth takes 3 weeks, counted from the day the deposit lands.'],
+  ['Can my team edit the site after launch?', 'Yes. It is a normal Framer site, so anyone on your team can change text, images and blog posts without code. I walk you through it at hand-off.'],
+  ['Who owns the site?', 'You do. The Framer project moves into your workspace at launch, along with the Figma file.'],
+  ['What does hosting cost?', 'The site is hosted on Framer, and you pay Framer directly for a site plan. There is no extra fee from me.'],
+  ['What if I need changes later?', 'Growth includes 14 days of fixes after launch. After that, and for Launch sites, I take on updates as small fixed-price jobs.'],
+];
+const arrow = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>';
+---
+<Base title="Davesframes — Framer sites for SaaS" description="SaaS marketing sites designed in Figma and built in Framer, so your team can edit every page without a developer. Fixed packages, clear timelines.">
+
+  <section class="hero">
+    <pre class="ascii" aria-hidden="true">{david}</pre>
+    <div class="container hero-content">
+      <span class="badge bevel">FRAMER SITES FOR SAAS</span>
+      <h1 class="display-72">Your SaaS deserves a site that sells.</h1>
+      <p class="body-20 muted">I design SaaS marketing sites in Figma and build them in Framer, so your team can edit every page without a developer. Fixed packages, clear timelines.</p>
+      <div class="actions">
+        <a href="/contact#book" class="btn bevel">Book a call</a>
+        <a href="#work" class="btn btn--secondary bevel">See the work</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="container showcase">
+    <img class="showcase-img bevel-clip" src="/media/showcase.webp" width="2000" height="1339" decoding="async"
+      alt="The Halyard homepage built by Davesframes: hero copy above a product dashboard with pass rate, eval runs and suite health" />
+  </div>
+
+  <section id="work" class="section">
+    <div class="container">
+      <Header badge="WORK" title="Recent builds" text="Demo sites for made-up SaaS products. Each one was designed in Figma and built in Framer from scratch." />
+      <div class="projects">
+        {projects.map(p => (
+          <article class="project">
+            <img class="thumb bevel-clip" src={p.image} alt={p.alt} width="2000" height="1125" loading="lazy" decoding="async" />
+            <div class="stack meta" style="gap: 8px; justify-items: start">
+              <span class="badge bevel">DEMO BUILD</span>
+              <h3 class="heading-24">{p.name}</h3>
+              <p class="muted">{p.text}</p>
+            </div>
+            <a href={p.href} class="btn btn--secondary bevel" target="_blank" rel="noopener">View live site<span class="sr-only"> for {p.name} (opens in a new tab)</span></a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <Header badge="WHAT YOU GET" title="Everything a SaaS site needs" text="One package covers design, build and launch. You deal with one person from first call to live site." />
+      <div class="bento">
+        {features.map((f, i) => (
+          <article class:list={['feature card bevel', { tint: i === 0 || i === 2 }]}>
+            {f.video
+              ? <video class="visual bevel-clip" data-loop muted loop playsinline preload="none" poster={f.media} aria-label={f.alt} style={`object-position: ${f.focus}`}><source src={f.video} type="video/mp4" /></video>
+              : <img class="visual bevel-clip" src={f.media} alt={f.alt} loading="lazy" decoding="async" style={`object-fit: ${f.fit}; padding: 0 16px`} />}
+            <div class="stack" style="gap: 8px">
+              <h3 class="heading-24">{f.title}</h3>
+              <p class="muted">{f.text}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="process" class="section">
+    <div class="container">
+      <Header badge="PROCESS" title="From first call to live site" text="Four steps, one fixed price. You always know what happens next." />
+      <ol class="steps">
+        {steps.map(([t, d], i) => (
+          <li class="card bevel stack" style="gap: 12px">
+            <span class="code-13" style="color: var(--accent)">0{i + 1}</span>
+            <h3 class="heading-24">{t}</h3>
+            <p class="muted">{d}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section id="pricing" class="section">
+    <div class="container">
+      <Header badge="PRICING" title="Fixed packages, no surprises" text="Pick a package on the call. The price you are quoted is the price you pay." />
+      <div class="plans">
+        <article class="plan card bevel">
+          <div class="plan-head"><span class="badge badge--gray bevel">ONE PAGE</span><h3 class="heading-32">Launch</h3></div>
+          <ul class="benefits">{launch.map(b => <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>{b}</li>)}</ul>
+          <div class="plan-foot"><p><span class="heading-32">$1,900</span> <span class="muted">one-off</span></p><a href="/contact#book" class="btn btn--sm bevel">Book a call <Fragment set:html={arrow} /></a></div>
+        </article>
+        <article class="plan plan--featured card bevel">
+          <div class="plan-head"><span class="badge badge--blue bevel">RECOMMENDED</span><h3 class="heading-32">Growth</h3></div>
+          <ul class="benefits two-col">{growth.map(b => <li><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="currentColor"/><path d="M4.5 8.2l2.3 2.3 4.7-4.7" fill="none" stroke="var(--bg-inverse)" stroke-width="1.5"/></svg>{b}</li>)}</ul>
+          <div class="plan-foot"><p><span class="heading-32">$3,600</span> <span class="price-note">one-off</span></p><a href="/contact#book" class="btn btn--sm btn--light bevel">Book a call <Fragment set:html={arrow} /></a></div>
+        </article>
+      </div>
+      <div class="addon card bevel">
+        <span class="badge badge--gray badge--sm bevel">ADD-ON</span>
+        <p><strong class="addon-name">Notion-synced CMS</strong> <span class="muted">Write posts in Notion and they publish to your Framer site.</span></p>
+        <p class="addon-price">from $500</p>
+      </div>
+      <div class="terms">
+        <p>50% to start, 50% on launch.</p>
+        <p class="label-14 muted">A page is one unique layout. A revision round is one consolidated set of feedback.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="section band">
+    <div class="container faq">
+      <div class="faq-intro">
+        <h2 class="heading-40">Questions,<br />answered.</h2>
+        <div class="stack" style="justify-items: start">
+          <p class="muted" style="max-width: 400px">Something else on your mind? Book a short call and ask me directly.</p>
+          <a href="/contact#book" class="btn btn--sm bevel">Book a call</a>
+        </div>
+      </div>
+      <div class="faq-list">
+        {faqs.map(([q, a], i) => (
+          <details class="bevel qa" open={i === 0}>
+            <summary class="body-18">{q}<span class="toggle" aria-hidden="true"></span></summary>
+            <p class="muted">{a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section band cta-band">
+    <div class="container">
+      <div class="cta bevel">
+        <div class="stack" style="justify-items: start">
+          <span class="badge badge--gray badge--sm bevel">LET'S TALK</span>
+          <h2 class="display-48">Ready for a site that sells?</h2>
+          <p class="body-20 muted">Book a short intro call. You get a fixed quote and a clear timeline, with no obligation.</p>
+        </div>
+        <div class="cta-actions">
+          <div class="actions">
+            <a href="/contact#book" class="btn bevel">Book a call <Fragment set:html={arrow} /></a>
+            <a href="#pricing" class="btn btn--secondary bevel">See pricing</a>
+          </div>
+          <p class="label-14 muted">No pressure. Just a conversation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  // Play bento clips only while on screen; leave the poster still for reduced-motion users.
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const io = new IntersectionObserver(entries => {
+      for (const e of entries) {
+        const v = e.target as HTMLVideoElement;
+        e.isIntersecting ? v.play().catch(() => {}) : v.pause();
+      }
+    }, { threshold: 0.25 });
+    document.querySelectorAll<HTMLVideoElement>('video[data-loop]').forEach(v => io.observe(v));
+  }
+</script>
+
+<style>
+  /* Hero: content left, ASCII David bleeding off the right (desktop only) */
+  .hero { position: relative; overflow: hidden; padding-block: calc(72px + var(--section-y)) var(--section-y); }
+  .hero-content { position: relative; display: grid; gap: var(--space-6); justify-items: start; }
+  .hero h1 { max-width: 720px; }
+  .hero p { max-width: 640px; }
+  .actions { display: flex; flex-wrap: wrap; gap: var(--space-4); }
+  .ascii { display: none; }
+  @media (min-width: 900px) {
+    .hero { min-height: 680px; display: grid; align-items: center; padding-block: 144px 64px; }
+    .ascii {
+      display: block; position: absolute; right: 0; top: 50%; translate: 0 -50%;
+      margin: 0; font: 14px/16px var(--mono); color: var(--fg-primary); opacity: 0.1;
+      pointer-events: none; user-select: none;
+    }
+  }
+  @media (max-width: 899px) { .hero .actions .btn { width: 100%; } }
+
+  .showcase { padding-bottom: var(--section-y); }
+  .showcase-img { --r: 12px; width: 100%; height: auto; border: 1px solid var(--border); background: var(--bg-page); }
+
+  .projects { display: grid; gap: 40px; }
+  .project { display: grid; gap: 20px; justify-items: start; align-content: start; }
+  .thumb { --r: 12px; width: 100%; height: auto; border: 1px solid var(--border); background: var(--bg-surface); }
+  @media (min-width: 900px) {
+    .projects { grid-template-columns: 1fr 1fr; gap: 32px; }
+    /* a single project spans the row: thumbnail left, details right */
+    .project:only-child { grid-column: 1 / -1; grid-template-columns: 2fr 1fr; grid-template-rows: 1fr auto auto 1fr; column-gap: var(--space-8); }
+    .project:only-child .thumb { grid-row: 1 / -1; }
+    .project:only-child .meta { grid-row: 2; grid-column: 2; }
+    .project:only-child .btn { grid-row: 3; grid-column: 2; }
+  }
+
+  .bento { display: grid; gap: var(--space-6); }
+  .feature { display: grid; grid-template-rows: auto auto; gap: var(--space-6); }
+  .feature.tint { --bg: var(--accent-subtle); }
+  .visual { height: 160px; width: 100%; --r: 8px; object-fit: cover; }
+  :is(video, img).visual { border: 1px solid var(--border); background: var(--bg-page); }
+  .feature:first-child .visual { height: 215px; }
+  @media (min-width: 900px) {
+    .bento { grid-template-columns: 400px 1fr 1fr; }
+    .feature:first-child { grid-row: span 2; grid-template-rows: 1fr auto; }
+    .feature:first-child .visual { height: auto; min-height: 430px; }
+    .visual { height: 152px; }
+  }
+
+  .steps { display: grid; gap: var(--space-5); margin: 0; padding: 0; list-style: none; }
+  @media (min-width: 900px) { .steps { grid-template-columns: repeat(4, 1fr); gap: var(--space-6); } }
+
+  .plans { display: grid; gap: var(--space-7); }
+  .plan { --bg: var(--bg-surface); display: flex; flex-direction: column; padding: var(--space-7); }
+  .plan-head { display: grid; gap: var(--space-5); justify-items: start; padding-bottom: var(--space-6); border-bottom: 1px solid var(--border); }
+  .benefits { display: grid; gap: var(--space-5); padding-block: var(--space-6); flex: 1; align-content: start; }
+  .benefits li { display: flex; gap: var(--space-4); align-items: flex-start; }
+  .benefits svg { flex: none; width: 16px; height: 16px; margin-top: 4px; }
+  .plan-foot { display: flex; align-items: center; justify-content: space-between; gap: var(--space-5); padding-top: var(--space-6); border-top: 1px solid var(--border); }
+  .plan--featured { --bg: var(--bg-inverse); --bd: var(--bg-inverse); color: var(--fg-inverse); }
+  .plan--featured .plan-head, .plan--featured .plan-foot { border-color: rgb(255 255 255 / 0.2); }
+  .plan--featured .benefits svg { color: var(--fg-inverse); width: 20px; height: 20px; margin-top: 2px; }
+  .price-note { color: #a1a1a1; }
+  .addon { display: grid; gap: var(--space-4); justify-items: start; margin-top: var(--space-7); }
+  .addon-name { font-weight: 500; }
+  .addon-price { white-space: nowrap; }
+  .terms { display: grid; gap: var(--space-3); margin-top: var(--space-6); text-align: center; }
+  @media (min-width: 900px) {
+    .addon { grid-template-columns: auto 1fr auto; align-items: center; gap: var(--space-5); padding-inline: var(--space-7); }
+  }
+  .btn--light { --bg: var(--bg-page); color: var(--fg-primary); }
+  .btn--light:hover { --bg: var(--btn-2-bg-hover); }
+  @media (min-width: 900px) {
+    .plans { grid-template-columns: 480px 1fr; }
+    /* fill down the first column, like the Figma card */
+    .two-col { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(5, auto); grid-auto-flow: column; column-gap: var(--space-7); }
+  }
+
+  .faq { display: grid; gap: var(--space-8); }
+  .faq-intro { display: grid; gap: var(--space-7); align-content: space-between; }
+  .faq-list { display: grid; gap: var(--space-3); align-content: start; }
+  .qa { --bg: var(--bg-page); padding: var(--space-6); }
+  .qa summary { list-style: none; display: flex; justify-content: space-between; gap: var(--space-5); cursor: pointer; }
+  .qa summary::-webkit-details-marker { display: none; }
+  .qa p { margin-top: var(--space-5); }
+  .toggle { flex: none; width: 28px; height: 28px; border: 1px solid var(--border); border-radius: 50%; position: relative; }
+  .toggle::before, .toggle::after { content: ''; position: absolute; inset: 50% auto auto 50%; width: 10px; height: 1.5px; background: currentColor; translate: -50% -50%; }
+  .toggle::after { rotate: 90deg; }
+  .qa[open] .toggle { rotate: 45deg; }
+  @media (min-width: 900px) { .faq { grid-template-columns: 1fr 648px; gap: var(--space-9); } }
+
+  .cta-band { padding-block: var(--space-9); }
+  .cta { --bg: var(--bg-page); --bd: var(--border); display: grid; gap: var(--space-7); padding: var(--space-6); }
+  .cta-actions { display: grid; gap: var(--space-4); }
+  @media (max-width: 899px) { .cta .actions .btn { width: 100%; } }
+  @media (min-width: 900px) {
+    .cta { grid-template-columns: 1fr auto; align-items: center; padding: var(--space-8) 64px; }
+    .cta-actions { justify-items: end; }
+  }
+</style>

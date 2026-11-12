@@ -1,0 +1,141 @@
+/* Astro Cyan tokens (Semantic Color: Light, Dimensions, Typography), exported from Figma 2026-11-06 */
+:root {
+  --bg-page: #ffffff;
+  --bg-surface: #f9fafb;
+  --bg-inverse: #171717;
+  --fg-primary: #171717;
+  --fg-secondary: #6f6f6f; /* token is #8f8f8f; darkened to pass WCAG AA on white */
+  --fg-inverse: #ffffff;
+  --border: #ebebeb;
+  --accent: #0072f5;
+  --accent-subtle: #ebf5ff;
+  --focus: #52aeff;
+  --badge-blue-bg: #ebf5ff;
+  --badge-blue-fg: #0068d6;
+  --badge-gray-bg: #8f8f8f;
+  --btn-bg: #171717;
+  --btn-bg-hover: #666666;
+  --btn-2-bg: #f2f2f2;
+  --btn-2-bg-hover: #ebebeb;
+  --btn-2-border: #e6e6e6;
+
+  --space-3: 8px;
+  --space-4: 12px;
+  --space-5: 16px;
+  --space-6: 24px;
+  --space-7: 32px;
+  --space-8: 48px;
+  --space-9: 64px;
+
+  --font: 'Geist', system-ui, sans-serif;
+  --mono: 'Geist Mono', ui-monospace, monospace;
+
+  --gutter: 24px;
+  --section-y: 64px;
+}
+@media (min-width: 900px) {
+  :root { --section-y: 96px; }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 112px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0;
+  background: var(--bg-page);
+  color: var(--fg-primary);
+  font: 400 16px/24px var(--font);
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, p, ul, figure { margin: 0; }
+h1, h2, h3 { font-weight: 400; }
+ul { padding: 0; list-style: none; }
+a { color: inherit; text-decoration: none; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+img, video, svg { display: block; max-width: 100%; }
+
+/* Type scale (Astro Cyan text styles) */
+.display-72 { font-size: clamp(44px, 6vw, 72px); line-height: 1.06; }
+.display-48 { font-size: clamp(36px, 4vw, 48px); line-height: 1.08; }
+.heading-40 { font-size: clamp(32px, 3.4vw, 40px); line-height: 1.2; }
+.heading-32 { font-size: 32px; line-height: 40px; }
+.heading-24 { font-size: 24px; line-height: 32px; }
+.body-20 { font-size: clamp(18px, 1.6vw, 20px); line-height: 1.5; }
+.body-18 { font-size: 18px; line-height: 28px; }
+.label-14 { font-size: 14px; line-height: 20px; }
+.code-13 { font: 13px/20px var(--mono); }
+.muted { color: var(--fg-secondary); }
+
+/* Layout: 1200px content, 120px gutter at 1440 */
+.container { width: min(1200px, 100% - 2 * var(--gutter)); margin-inline: auto; }
+.section { padding-block: var(--section-y); }
+.band { background: var(--bg-surface); }
+.stack { display: grid; gap: var(--space-5); }
+.header { display: grid; gap: var(--space-5); max-width: 560px; margin-bottom: var(--space-8); justify-items: start; }
+
+/* Bevel (octagon) — the site's only corner style.
+   Real bevel where corner-shape is supported; elsewhere two clipped pseudo-layers draw the
+   border and fill, so borders still follow the cut (clip-path alone would cut them off).
+   Set --r, --bg and --bd on the element instead of background/border. */
+.bevel {
+  --r: 12px;
+  --bd: transparent;
+  position: relative;
+  isolation: isolate;
+  border: 1px solid transparent;
+}
+@supports (corner-shape: bevel) {
+  .bevel { background: var(--bg); border-color: var(--bd); border-radius: var(--r); corner-shape: bevel; }
+}
+@supports not (corner-shape: bevel) {
+  .bevel::before, .bevel::after { content: ''; position: absolute; pointer-events: none; }
+  .bevel::before {
+    inset: -1px; z-index: -2; background: var(--bd);
+    clip-path: polygon(var(--r) 0, calc(100% - var(--r)) 0, 100% var(--r), 100% calc(100% - var(--r)), calc(100% - var(--r)) 100%, var(--r) 100%, 0 calc(100% - var(--r)), 0 var(--r));
+  }
+  .bevel::after {
+    --i: calc(var(--r) - 0.41px); /* inner cut for a 1px border on a 45° edge */
+    inset: 0; z-index: -1; background: var(--bg);
+    clip-path: polygon(var(--i) 0, calc(100% - var(--i)) 0, 100% var(--i), 100% calc(100% - var(--i)), calc(100% - var(--i)) 100%, var(--i) 100%, 0 calc(100% - var(--i)), 0 var(--i));
+  }
+}
+.card { --bg: var(--bg-surface); --bd: var(--border); padding: var(--space-6); }
+
+/* Bevel for borderless media (img/video can't host the pseudo-layers above) */
+.bevel-clip { --r: 8px; border-radius: var(--r); corner-shape: bevel; }
+@supports not (corner-shape: bevel) {
+  .bevel-clip {
+    border-radius: 0;
+    clip-path: polygon(var(--r) 0, calc(100% - var(--r)) 0, 100% var(--r), 100% calc(100% - var(--r)), calc(100% - var(--r)) 100%, var(--r) 100%, 0 calc(100% - var(--r)), 0 var(--r));
+  }
+}
+
+/* Buttons (Astro Cyan Button, shape=bevel) */
+.btn {
+  --r: 8px; --bg: var(--btn-bg);
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-3);
+  height: 48px; padding: 0 var(--space-4);
+  color: var(--fg-inverse); font: 400 16px/1 var(--font); white-space: nowrap;
+  cursor: pointer;
+}
+.btn:hover { --bg: var(--btn-bg-hover); }
+.btn--secondary { --bg: var(--btn-2-bg); --bd: var(--btn-2-border); color: var(--fg-primary); }
+.btn--secondary:hover { --bg: var(--btn-2-bg-hover); }
+.btn--sm { --r: 6px; height: 40px; font-size: 14px; }
+.btn svg { width: 16px; height: 16px; flex: none; }
+
+/* Badges (Astro Cyan Badge, shape=bevel) */
+.badge {
+  --r: 8px; --bg: var(--badge-blue-bg);
+  display: inline-flex; align-items: center; height: 24px; padding: 0 10px;
+  color: var(--badge-blue-fg); font-size: 12px; line-height: 1; letter-spacing: 0.02em;
+}
+.badge--gray { --bg: var(--badge-gray-bg); color: var(--fg-inverse); }
+.badge--blue { --bg: var(--accent); color: var(--fg-inverse); }
+.badge--sm { --r: 6px; height: 20px; padding: 0 8px; font-size: 11px; }
+
+/* Empty media slot until recordings/screenshots arrive */
+.slot { --bg: var(--bg-surface); --bd: var(--border); }
+.slot--empty { --bg: var(--bg-page); --bd: #d4d4d4; }
+
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }

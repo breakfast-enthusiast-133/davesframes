@@ -1,0 +1,56 @@
+---
+import Base from '../layouts/Base.astro';
+const expect = [
+  'We talk through your product, audience and goals.',
+  'I suggest the package that fits, and what it would include.',
+  'You get a fixed quote and timeline by email afterwards.',
+];
+---
+<Base title="Book an intro call — Davesframes" description="Book a short intro call about your SaaS site. You leave with a clear next step, and a fixed quote follows.">
+  <section class="section contact">
+    <div class="container grid">
+      <div class="intro">
+        <div class="header" style="margin: 0">
+          <span class="badge bevel">CONTACT</span>
+          <h1 class="heading-40">Book an intro call</h1>
+          <p class="body-20 muted">A short call about your product and what your site needs to do. You leave with a clear next step, and a fixed quote follows.</p>
+        </div>
+        <ol class="expect">
+          {expect.map((t, i) => <li><span class="code-13" style="color: var(--accent)">0{i + 1}</span><span class="body-18 muted">{t}</span></li>)}
+        </ol>
+      </div>
+      <div id="book" class="bevel booking">
+        <div id="cal-inline">
+          <!-- shown until the Cal.com embed loads, or if scripts are blocked -->
+          <a class="btn bevel" href="https://cal.com/david-dube-jasqpk/30min">Book a 30-minute call on Cal.com</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<!-- Cal.com inline embed (official loader snippet), event: david-dube-jasqpk/30min -->
+<script is:inline>
+  (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+  Cal("init", "30min", { origin: "https://app.cal.com" });
+  Cal.ns["30min"]("inline", { elementOrSelector: "#cal-inline", calLink: "david-dube-jasqpk/30min", config: { layout: "month_view", theme: "light" } });
+  Cal.ns["30min"]("ui", { theme: "light", hideEventTypeDetails: false, layout: "month_view", cssVarsPerTheme: { light: { "cal-brand": "#171717" } } });
+</script>
+
+<style>
+  .contact { padding-top: calc(72px + var(--section-y)); }
+  .grid { display: grid; gap: 40px; }
+  .intro { display: grid; gap: 40px; align-content: start; }
+  .expect { display: grid; gap: var(--space-5); margin: 0; padding: 0; list-style: none; }
+  .expect li { display: flex; gap: var(--space-5); align-items: baseline; }
+  .booking { --bg: var(--bg-page); --bd: var(--border); padding: var(--space-3); min-height: 640px; }
+  #cal-inline { width: 100%; min-height: 620px; display: grid; place-items: center; }
+  #cal-inline:has(iframe) { display: block; }
+  #cal-inline:has(iframe) > a { display: none; }
+  @media (min-width: 900px) {
+    .contact { padding-top: 176px; }
+    .grid { grid-template-columns: 1fr 600px; gap: 64px; }
+    .booking { min-height: 720px; }
+    #cal-inline { min-height: 700px; }
+  }
+</style>

@@ -1,0 +1,56 @@
+---
+import Logo from './Logo.astro';
+const links = [['Work', '/#work'], ['Process', '/#process'], ['Pricing', '/#pricing'], ['FAQ', '/#faq']];
+---
+<header class="nav bevel">
+  <a href="/" class="logo" aria-label="Davesframes home"><Logo /></a>
+  <nav aria-label="Main">
+    <ul class="links">
+      {links.map(([label, href]) => <li><a href={href}>{label}</a></li>)}
+    </ul>
+  </nav>
+  <a href="/contact#book" class="btn btn--sm bevel">Book a call</a>
+  <!-- ponytail: <details> gives the mobile menu open/close with no JS -->
+  <details class="menu">
+    <summary aria-label="Menu">
+      <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="1.5"/></svg>
+    </summary>
+    <ul class="bevel">
+      {links.map(([label, href]) => <li><a href={href}>{label}</a></li>)}
+    </ul>
+  </details>
+</header>
+
+<style>
+  .nav {
+    --r: 12px;
+    --bg: rgb(255 255 255 / 0.72);
+    --bd: var(--border);
+    position: fixed; z-index: 10;
+    top: 12px; left: 50%; translate: -50% 0;
+    width: min(1248px, 100% - 24px); height: 72px;
+    display: flex; align-items: center; gap: var(--space-5);
+    padding-inline: 12px;
+    backdrop-filter: blur(24px);
+  }
+  /* fallback branch draws the fill on ::after, so blur there too */
+  .nav::after { backdrop-filter: blur(24px); }
+  .logo { margin-right: auto; }
+  .links { display: none; gap: var(--space-7); }
+  .links a:hover { color: var(--fg-secondary); }
+  .menu { position: relative; }
+  .menu summary { list-style: none; display: grid; place-items: center; width: 40px; height: 40px; cursor: pointer; }
+  .menu summary::-webkit-details-marker { display: none; }
+  .menu ul {
+    --bg: var(--bg-page); --bd: var(--border);
+    position: absolute; right: 0; top: 52px; min-width: 180px;
+    display: grid; padding: var(--space-3);
+  }
+  .menu a { display: block; padding: 10px 12px; }
+  @media (min-width: 900px) {
+    .nav { top: 16px; height: 80px; padding-inline: 24px; display: grid; grid-template-columns: 1fr auto 1fr; }
+    .links { display: flex; }
+    .nav > .btn { justify-self: end; }
+    .menu { display: none; }
+  }
+</style>
